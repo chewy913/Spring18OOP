@@ -5,53 +5,31 @@
  */
 package lightswitch;
 
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
-import org.junit.Test;
-import static org.junit.Assert.*;
-
 /**
  *
  * @author chewy913
  */
-public class LightRegulatorTest {
+public class LightRegulator extends Lightswitch {
+    private int Lightlevel;
     
-    public LightRegulatorTest() {
+    public LightRegulator (){
+        Lightlevel=0;
     }
-    
-    @BeforeClass
-    public static void setUpClass() {
+    public int getCurrentlevel(){
+        return Lightlevel;
     }
-    
-    @AfterClass
-    public static void tearDownClass() {
+    public void setLightLevel(int newlevel){
+        if(newlevel<0||newlevel>100){
+            throw new IllegalArgumentException("Error Light Level must be between 0 and 100");
+            
+    } else{
+            Lightlevel=newlevel;
+            if (Lightlevel==0)
+            {
+                mode=Mode.OFF;
+        }else{
+                mode=Mode.ON;
+            }
     }
-
-    /**
-     * Test of getCurrentlevel method, of class LightRegulator.
-     */
-    @Test
-    public void testGetCurrentlevel() {
-        System.out.println("getCurrentlevel");
-        LightRegulator instance = new LightRegulator();
-        instance.setLightLevel(27);
-        int expResult = 27;
-        int result = instance.getCurrentlevel();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-    }
-
-    /**
-     * Test of setLightLevel method, of class LightRegulator.
-     */
-    @Test
-    public void testSetLightLevel() {
-        System.out.println("setLightLevel");
-        int newlevel = 37;
-        LightRegulator instance = new LightRegulator();
-        instance.setLightLevel(newlevel);
-        assertEquals(newlevel,instance.getCurrentlevel());
-        // TODO review the generated test code and remove the default call to fail.
-    }
-    
+}
 }
